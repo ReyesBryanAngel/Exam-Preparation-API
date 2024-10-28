@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:8.0.36
+    container_name: exam-preparation
+    environment:
+      MYSQL_ROOT_PASSWORD: Toshiba_25
+      MYSQL_DATABASE: exam-preparation-db
+    ports:
+      - "3070:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: exam_preparation_pma
+    platform: linux/amd64
+    environment:
+      PMA_HOST: exam-preparation
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8084:80
+
+volumes:
+  dbdata:
